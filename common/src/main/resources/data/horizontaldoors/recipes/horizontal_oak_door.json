@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
-  "group": "wooden_door",
+  "group": "horizontal_wooden_door",
   "ingredients": [
     {
       "item": "minecraft:oak_door"
