@@ -3,6 +3,8 @@
 
 See you on [Discord](https://discord.gg/kQcbF4BMRh)
 
+Get mod on [Modrinth](https://modrinth.com/mod/horizontal-doors)
+
 ![image](https://github.com/user-attachments/assets/e29d374d-a883-4d06-87bb-0dfd73118e11)
 
 
