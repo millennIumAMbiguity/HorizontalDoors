@@ -1,13 +1,9 @@
 package millenniumambiguity.horizontaldoors.blocks;
 
-import millenniumambiguity.horizontaldoors.Constants;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.piglin.PiglinAi;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -19,11 +15,8 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.properties.*;
-import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -40,6 +33,10 @@ public class HorizontalDoorBlock extends DoorBlock {
 
     public HorizontalDoorBlock(BlockSetType $$0, BlockBehaviour.Properties $$1) {
         super($$0, $$1);
+    }
+
+    public HorizontalDoorBlock(DoorBlock baseDoor) {
+        super(baseDoor.type(), Block.Properties.ofFullCopy(baseDoor));
     }
 
     @Override

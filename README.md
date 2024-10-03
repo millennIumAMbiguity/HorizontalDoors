@@ -11,5 +11,5 @@ Get mod on [Modrinth](https://modrinth.com/mod/horizontal-doors)
 ### TODO
  - [ ] Improve door placement.
  - [ ] Add other door types. (easy)
- - [ ] Fix registry loading for Forge and NeoForge.
+ - [x] Fix registry loading for Forge and NeoForge.
  - [ ] Add more versions (1.18.4 - 1.21)

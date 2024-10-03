@@ -8,6 +8,9 @@ public class HorizontalDoorsMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
+
         CommonClass.init();
+
+        Reg.RegisterAll();
     }
 }

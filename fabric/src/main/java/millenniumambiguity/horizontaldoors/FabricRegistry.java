@@ -6,18 +6,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 
-import java.util.function.Supplier;
-
 public class FabricRegistry extends CommonRegistry {
-
-    FabricRegistry() {
-        registry = this;
-    }
-
-    public static Supplier<Item> HORIZONTAL_OAK_DOOR_ITEM() {
-        return registerItem("horizontal_oak_door",
-                () -> new BlockItem(RegisterHorizontalOakDoorBlock().get(), new Item.Properties()));
-    }
 
     @Override
     public void RenderBlockAsCutout(Block block) {
@@ -27,13 +16,13 @@ public class FabricRegistry extends CommonRegistry {
     @Override
     public void AddItemToCreativeTabRedstone(Item itemBefore, Item item) {
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(entries -> {
-            entries.addBefore(new ItemStack(Items.OAK_DOOR), new ItemStack(item));
+            entries.addBefore(new ItemStack(itemBefore), new ItemStack(item));
         });
     }
 
     public void AddItemToCreativeTabBuilding(Item itemBefore, Item item) {
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.BUILDING_BLOCKS).register(entries -> {
-            entries.addBefore(new ItemStack(Items.OAK_DOOR), new ItemStack(item));
+            entries.addBefore(new ItemStack(itemBefore), new ItemStack(item));
         });
     }
 }
