@@ -5,8 +5,6 @@ import millenniumambiguity.horizontaldoors.blocks.IHorizontalDoor;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 
@@ -16,9 +14,19 @@ public abstract class CommonRegistry {
 
     protected final String namePrefix = "horizontal_";
 
-    protected String GetName(Block block){
-        String[] hits = block.getDescriptionId().split("\\.", 3);
+    protected String GetName(IHorizontalDoor hDoor){
+        String[] hits = hDoor.GetBaseDoorBlock().getDescriptionId().split("\\.", 3);
         return namePrefix + hits[hits.length -1];
+    }
+
+    public Supplier<Block> GetDoorBlock(IHorizontalDoor hDoor) {
+        return () -> CommonClass.HORIZONTAL_DOOR_BLOCKS.computeIfAbsent(hDoor, key ->
+                new HorizontalDoorBlock(key.GetBaseDoorBlock()));
+    }
+
+    public Supplier<Item> GetDoorItem(IHorizontalDoor hDoor) {
+        return () -> CommonClass.HORIZONTAL_DOOR_ITEMS.computeIfAbsent(hDoor, key ->
+                new BlockItem(GetDoorBlock(hDoor).get(), new Item.Properties()));
     }
 
     public void RegisterAll() {
@@ -28,47 +36,32 @@ public abstract class CommonRegistry {
     }
 
     public void Register(IHorizontalDoor hDoor) {
-        DoorBlock baseBlock = hDoor.GetBaseDoorBlock();
-        Block block = new HorizontalDoorBlock(baseBlock);
-        String name = GetName(baseBlock);
-        RegisterBlock(name, block);
-        Item item = new BlockItem(block, new Item.Properties());
-        RegisterItem(name, item);
-        AddItemToCreativeTabBuilding(baseBlock.asItem(), item);
-        if (baseBlock == Blocks.OAK_DOOR || baseBlock == Blocks.IRON_DOOR) {
-            AddItemToCreativeTabRedstone(baseBlock.asItem(), item);
-        }
+        String name = GetName(hDoor);
+        RegisterBlock(name, GetDoorBlock(hDoor));
+        RegisterItem(name, GetDoorItem(hDoor));
     }
 
     public Supplier<Block> RegisterBlock(IHorizontalDoor hDoor) {
-        DoorBlock baseBlock = hDoor.GetBaseDoorBlock();
-        Block block = new HorizontalDoorBlock(baseBlock);
-        String name = GetName(baseBlock);
-        return RegisterBlock(name, block);
+        return RegisterBlock(GetName(hDoor), GetDoorBlock(hDoor));
     }
 
-    public Supplier<Block> RegisterBlock(String name, Block block) {
-        RenderBlockAsCutout(block);
-        Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Constants.MOD_ID, name), block);
-        return () -> block;
+    public Supplier<Block> RegisterBlock(String name, Supplier<Block> block) {
+        return () -> {
+            Block b = block.get();
+            Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Constants.MOD_ID, name), b);
+            return b;
+        };
     }
 
     public Supplier<Item> RegisterItem(IHorizontalDoor hDoor) {
-        DoorBlock baseBlock = hDoor.GetBaseDoorBlock();
-        Block block = new HorizontalDoorBlock(baseBlock);
-        String name = GetName(baseBlock);
-        Item item = new BlockItem(block, new Item.Properties());
-        return RegisterItem(name, item);
+        return RegisterItem(GetName(hDoor), GetDoorItem(hDoor));
     }
 
-    public Supplier<Item> RegisterItem(String name, Item item) {
-        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Constants.MOD_ID, name), item);
-        return () -> item;
+    public Supplier<Item> RegisterItem(String name, Supplier<Item> item) {
+        return () -> {
+            Item i = item.get();
+            Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Constants.MOD_ID, name), i);
+            return i;
+        };
     }
-
-    public abstract void RenderBlockAsCutout(Block block);
-
-    public abstract void AddItemToCreativeTabRedstone(Item itemBefore, Item item);
-
-    public abstract void AddItemToCreativeTabBuilding(Item itemBefore, Item item);
 }

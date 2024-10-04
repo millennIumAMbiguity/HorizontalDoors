@@ -12,5 +12,6 @@ public class HorizontalDoorsMod implements ModInitializer {
         CommonClass.init();
 
         Reg.RegisterAll();
+        Reg.AddItemToCreativeTab();
     }
 }
