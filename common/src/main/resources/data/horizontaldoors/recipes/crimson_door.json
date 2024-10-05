@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wooden_door",
+  "ingredients": [
+    {
+      "item": "horizontaldoors:horizontal_crimson_door"
+    }
+  ],
+  "result": {
+    "item": "minecraft:crimson_door"
+  }
+}

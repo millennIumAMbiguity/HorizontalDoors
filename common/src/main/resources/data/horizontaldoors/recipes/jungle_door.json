@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wooden_door",
+  "ingredients": [
+    {
+      "item": "horizontaldoors:horizontal_jungle_door"
+    }
+  ],
+  "result": {
+    "item": "minecraft:jungle_door"
+  }
+}

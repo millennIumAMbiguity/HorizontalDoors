@@ -14,6 +14,6 @@ Perfect for underground bases, hidden bunkers, or even decorative ceilings!
 
 ### TODO
  - [ ] Improve door placement.
- - [ ] Add other door types. (easy)
+ - [x] Add other door types. (easy)
  - [x] Fix registry loading for Forge and NeoForge.
  - [ ] Add more versions (1.18.4 - 1.21)

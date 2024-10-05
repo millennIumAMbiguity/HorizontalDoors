@@ -1,6 +1,16 @@
 {
   "replace": false,
   "values": [
-    "horizontaldoors:horizontal_oak_door"
+    "horizontaldoors:horizontal_oak_door",
+    "horizontaldoors:horizontal_spruce_door",
+    "horizontaldoors:horizontal_birch_door",
+    "horizontaldoors:horizontal_jungle_door",
+    "horizontaldoors:horizontal_acacia_door",
+    "horizontaldoors:horizontal_dark_oak_door",
+    "horizontaldoors:horizontal_mangrove_door",
+    "horizontaldoors:horizontal_cherry_door",
+    "horizontaldoors:horizontal_bamboo_door",
+    "horizontaldoors:horizontal_crimson_door",
+    "horizontaldoors:horizontal_warped_door"
   ]
 }
