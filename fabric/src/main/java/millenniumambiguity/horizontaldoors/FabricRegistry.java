@@ -1,8 +1,10 @@
 package millenniumambiguity.horizontaldoors;
 
 import millenniumambiguity.horizontaldoors.blocks.IHorizontalDoor;
+import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,6 +17,12 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class FabricRegistry extends CommonRegistry {
+
+    private EnvType environmentType;
+
+    FabricRegistry() {
+        environmentType = FabricLoader.getInstance().getEnvironmentType();
+    }
 
     public void AddItemToCreativeTab() {
         for (Map.Entry<IHorizontalDoor, Item> entry : CommonClass.HORIZONTAL_DOOR_ITEMS.entrySet()){
@@ -49,6 +57,8 @@ public class FabricRegistry extends CommonRegistry {
     }
 
     public void RenderBlockAsCutout(Block block) {
-        BlockRenderLayerMap.INSTANCE.putBlock(block, RenderType.cutout());
+        if (environmentType == EnvType.CLIENT) {
+            BlockRenderLayerMap.INSTANCE.putBlock(block, RenderType.cutout());
+        }
     }
 }
